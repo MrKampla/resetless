@@ -25,7 +25,7 @@ More information about CLI can be found [here](#resetless-cli)
 
 ### How to use
 
-```
+```ts
 import { Resetless } from '@resetless/core';
 
 const rl = new Resetless();
@@ -65,7 +65,7 @@ By module, we mean a function that implements some functionality. Resetless allo
 
 Resetless uses JavaScript `eval` function to evaluate module code, so module shouldn't use any exporting syntax like `export` keyword or `module.exports`. In order for Resetless to be able to extract that module function, it has to be declared as inline anonymous function:
 
-```
+```js
 // this is a module file
 (anyArguments) => {
   // module logic
@@ -74,7 +74,7 @@ Resetless uses JavaScript `eval` function to evaluate module code, so module sho
 
 Some bundlers may ignore statements with no effects (and a bare anonymous function declaration can be classified as such) so in order to omit this issue, we suggest wrapping a module in an IIFE, and returning an actual function from it:
 
-```
+```js
 // this is a module file
 (() => {
   // place for some initialization code
@@ -98,7 +98,7 @@ Updating a certain functionality by swapping underlying module function on a ser
 
 When using a web framework like Express, HTTP requests can trigger module reloads. Look at the example below:
 
-```
+```ts
 import { Resetless } from '@resetless/core';
 import express, { Request, RequestHandler, Response } from 'express';
 import {
@@ -134,7 +134,7 @@ app.listen(8080, () => console.log('Listening on 8080'));
 
 On each GET request to /hello-world, a module function called 'hello-world' will be invoked. Without Resetless, there isn't any possibility to change function implementation. But thanks to this function `initializeModuleUpdateEndpoint` we're able to change the module:
 
-```
+```ts
 import { Resetless } from '@resetless/core';
 import { Express } from 'express';
 
@@ -184,7 +184,7 @@ Additionally, it's worth to set up /\_\_moduleInfo endpoint that can show valuab
 
 By default, adding a module implementation does not trigger its parsing. The module will only be parsed once on the first request. But module caching can be turned off - in this case the module will be parsed every time it's requested. In order to see the difference, we've wrapped an actual module function in an IIFE. An IIFE can be used to leverage closure and [the module pattern](https://developer.mozilla.org/en-US/docs/Glossary/IIFE#the_module_pattern).
 
-```
+```js
  rl.addImplementationForModule(
       'module',
       `(() => {
@@ -226,7 +226,7 @@ All of that can be done with a configuration file. By default, CLI will check fo
 
 Resetless module update config looks like this:
 
-```
+```json
 {
   "uploadSettings": {
     "path": "./dist/module.js",
@@ -242,7 +242,7 @@ Resetless module update config looks like this:
 
 It consists of two objects, first one is called `uploadSettings` and it allows to specify path to the module code and the endpoint that the CLI will fire to. Second object is `requestConfig` and it accepts any data. Resetless CLI uses axios under the hood and all properties from `requestConfig` will be forwarded to axios instance, so You can override the default request.
 
-```
+```js
 // this is the default request that CLI makes
 axios({
     method: 'POST',
