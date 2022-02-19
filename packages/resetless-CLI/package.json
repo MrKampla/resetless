@@ -5,7 +5,7 @@
     "url": "https://github.com/MrKampla"
   },
   "description": "CLI tool for Resetless: Node.js framework that allows code to be updated while running continuously",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "license": "MIT",
   "main": "dist/index.js",
   "bin": {

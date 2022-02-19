@@ -10,16 +10,29 @@ Resetless is an unopinionated and mimimalist micro framework for building unstop
 
 In order to add Resetless to Your application, run:
 
-`yarn add resetless`
+```sh
+yarn add @resetless/core
+```
 
 or
 
-`npm install resetless`.
+```sh
+npm install @resetless/core
+```
 
 Resetless also delivers a handy CLI tool for developing modules and updating them on the remote server.
+You can install it globally:
+
+```sh
+npm install @resetless/cli -g
+```
+
+and then global resetless binary will be availible in Your terminal.
 To start a new project with resetless, run command:
 
-`npx resetless new`
+```sh
+resetless new project-name
+```
 
 More information about CLI can be found [here](#resetless-cli)
 
@@ -205,7 +218,7 @@ The aim of Resetless CLI tool is to improve the developer experience by automati
 In order to create a new project with Resetless preinstalled (blank or Express), run:
 
 ```
-npx resetless new <project-name> ['-l, --language <language>'] ['-t, --template <project-template>']
+resetless new <project-name> ['-l, --language <language>'] ['-t, --template <project-template>']
 ```
 
 #### New module
@@ -213,7 +226,7 @@ npx resetless new <project-name> ['-l, --language <language>'] ['-t, --template 
 If You want to generate a new repo for Resetless module, run:
 
 ```
-npx resetless generate <module-name> ['-l, --language <language>']
+resetless generate <module-name> ['-l, --language <language>']
 ```
 
 Newly generated module comes with Parcel bundler built-in and configured properly. Before actually uploading the module to the server, don't forget to run a build process that'll produce a single file `dist/module.js`. Thanks to Parcel, You can split up module code into multiple files and use `require` or `ES6 imports` at Your discretion.
@@ -260,7 +273,7 @@ axios({
 If You want upload a Resetless module from the CLI, run:
 
 ```
-npx resetless update <module-name>
+resetless update <module-name>
 ```
 
 #### Getting help
@@ -268,7 +281,7 @@ npx resetless update <module-name>
 Please remember that by passing `--help` option to the CLI, You'll always get the current list of supported commands:
 
 ```
-npx resetless --help
+resetless --help
 ```
 
 ### Development guide

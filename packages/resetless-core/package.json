@@ -5,7 +5,7 @@
     "url": "https://github.com/MrKampla"
   },
   "description": "Core of Resetless: Node.js framework that allows code update while running continuously",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
