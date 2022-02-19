@@ -1,0 +1,25 @@
+{
+  "name": "resetless-express-js",
+  "version": "1.0.0",
+  "author": "",
+  "description": "JavaScript starter for Resetless with Express.js",
+  "scripts": {
+    "dev": "node src/index.js",
+    "test": "jest",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "devDependencies": {
+    "eslint": "^8.8.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.4",
+    "jest": "^27.4.7",
+    "prettier": "^2.5.1",
+    "supertest": "^6.2.2"
+  },
+  "dependencies": {
+    "@resetless/core": "^0.0.1",
+    "express": "^4.17.2",
+    "dotenv": "^16.0.0"
+  }
+}

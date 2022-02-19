@@ -1,0 +1,11 @@
+{
+  "uploadSettings": {
+    "path": "./dist/module.js",
+    "endpoint": "http://localhost:8080/__moduleUpdate"
+  },
+  "requestConfig": {
+    "headers": {
+      "Authorization": "test"
+    }
+  }
+}

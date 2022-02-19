@@ -1,0 +1,67 @@
+{
+  "name": "@resetless/cli",
+  "author": {
+    "name": "Kamil Planer",
+    "url": "https://github.com/MrKampla"
+  },
+  "description": "CLI tool for Resetless: Node.js framework that allows code to be updated while running continuously",
+  "version": "0.0.1",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "bin": {
+    "resetless": "dist/index.js"
+  },
+  "exports": {
+    "require": "./dist/index.js",
+    "import": "./dist/core.esm.js"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build && echo '#!/usr/bin/env node\n' \"$(cat dist/index.js)\" > dist/index.js",
+    "build:tsc": "tsc",
+    "lint": "tsdx lint",
+    "size": "size-limit",
+    "analyze": "size-limit --why"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "tabWidth": 2,
+    "printWidth": 90,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "endOfLine": "lf"
+  },
+  "devDependencies": {
+    "@size-limit/preset-small-lib": "^7.0.8",
+    "@types/inquirer": "^8.2.0",
+    "@types/ncp": "^2.0.5",
+    "husky": "^7.0.4",
+    "lerna": "^4.0.0",
+    "size-limit": "^7.0.8",
+    "ts-node-dev": "^1.1.8",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.3.1",
+    "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "axios": "^0.26.0",
+    "chalk": "4.1.2",
+    "commander": "^9.0.0",
+    "inquirer": "^8.2.0",
+    "ncp": "^2.0.0",
+    "node-emoji": "^1.11.0",
+    "ora": "^5.4.1"
+  }
+}

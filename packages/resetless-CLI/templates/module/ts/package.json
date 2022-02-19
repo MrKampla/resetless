@@ -1,0 +1,27 @@
+{
+  "name": "resetless-module-starter-ts",
+  "version": "1.0.0",
+  "source": "src/module.ts",
+  "main": "dist/module.js",
+  "engines": {
+    "node": ">=10"
+  },
+  "targets": {
+    "main": {
+      "includeNodeModules": true
+    }
+  },
+  "scripts": {
+    "watch": "parcel watch",
+    "build": "rm -rf dist/ && tsc && parcel build --no-source-maps",
+    "test": "yarn build; jest"
+  },
+  "devDependencies": {
+    "parcel": "^2.3.1",
+    "typescript": "^4.5.5",
+    "jest": "^27.4.7",
+    "prettier": "^2.5.1",
+    "ts-jest": "^27.1.3"
+  },
+  "dependencies": {}
+}
