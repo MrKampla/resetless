@@ -2,6 +2,9 @@
 
 <p align=center>A Node.js framework with Hot Module Replacement (HMR) for backend</p>
 
+[![alt Version](https://img.shields.io/npm/v/@resetless/core?color=blue)](https://www.npmjs.com/package/@resetless/core) [![alt License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#)  
+**[GitHub](https://github.com/MrKampla/resetless)**
+
 ## Description
 
 Resetless is an unopinionated and mimimalist micro framework for building unstoppable, modular Node.js server-side applications. Its main advantage is the module resolution system that allows for adding new or updating existing modules to the app during runtime, without the need of restarting it. No more update downtime on production - ship new functionality within a blink of an eye! Resetless is built with TypeScript (but also can be use with pure JavaScript) and it really emphasizes modular and granular application creation. It doesn't enforce anything on the user, it's framework-agnostic and can be used together with other backend frameworks like Express.js or Fastify. It also can be used as a dependency injection container.
@@ -80,7 +83,7 @@ Resetless uses JavaScript `eval` function to evaluate module code, so module sho
 
 ```js
 // this is a module file
-anyArguments => {
+(anyArguments) => {
   // module logic
 };
 ```
@@ -91,7 +94,7 @@ Some bundlers may ignore statements with no effects (and a bare anonymous functi
 // this is a module file
 (() => {
   // place for some initialization code
-  return arg => {
+  return (arg) => {
     // module logic
   };
 })();

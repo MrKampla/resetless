@@ -2,6 +2,9 @@
 
 <p align=center>A Node.js framework with Hot Module Replacement (HMR) for backend</p>
 
+[![alt Version](https://img.shields.io/npm/v/@resetless/core?color=blue)](https://www.npmjs.com/package/@resetless/core) [![alt License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#)  
+**[GitHub](https://github.com/MrKampla/resetless)**
+
 ## Description
 
 Resetless is an unopinionated and mimimalist micro framework for building unstoppable, modular Node.js server-side applications. Its main advantage is the module resolution system that allows for adding new or updating existing modules to the app during runtime, without the need of restarting it. No more update downtime on production - ship new functionality within a blink of an eye! Resetless is built with TypeScript (but also can be use with pure JavaScript) and it really emphasizes modular and granular application creation. It doesn't enforce anything on the user, it's framework-agnostic and can be used together with other backend frameworks like Express.js or Fastify. It also can be used as a dependency injection container.
@@ -82,7 +85,7 @@ Resetless uses JavaScript `eval` function to evaluate module code, so module sho
 // this is a module file
 (anyArguments) => {
   // module logic
-}
+};
 ```
 
 Some bundlers may ignore statements with no effects (and a bare anonymous function declaration can be classified as such) so in order to omit this issue, we suggest wrapping a module in an IIFE, and returning an actual function from it:
@@ -93,7 +96,7 @@ Some bundlers may ignore statements with no effects (and a bare anonymous functi
   // place for some initialization code
   return (arg) => {
     // module logic
-  }
+  };
 })();
 ```
 
@@ -152,14 +155,14 @@ import { Resetless } from '@resetless/core';
 import { Express } from 'express';
 
 export const initializeModuleUpdateEndpoint = (
-app: Express,
-rl: Resetless,
-{ password, customEndpoint }: { password: string; customEndpoint?: string },
+  app: Express,
+  rl: Resetless,
+  { password, customEndpoint }: { password: string; customEndpoint?: string },
 ) => {
-app.post(customEndpoint ?? '/\_\_moduleUpdate', (req, res) => {
-if (req.body?.password !== password) {
-return res.status(401).json({ error: 'Incorrect password' });
-}
+  app.post(customEndpoint ?? '/__moduleUpdate', (req, res) => {
+    if (req.body?.password !== password) {
+      return res.status(401).json({ error: 'Incorrect password' });
+    }
 
     const { name, code, enableCaching } = req.body.module;
     if (!name || !code) {
@@ -169,23 +172,21 @@ return res.status(401).json({ error: 'Incorrect password' });
     }
 
     return res.json(rl.addImplementationForModule(name, code, enableCaching ?? true));
-
-});
+  });
 };
 
 export const initializeModuleInfoEndpoint = (
-app: Express,
-rl: Resetless,
-{ password, customEndpoint }: { password: string; customEndpoint?: string },
+  app: Express,
+  rl: Resetless,
+  { password, customEndpoint }: { password: string; customEndpoint?: string },
 ) => {
-app.get(customEndpoint ?? '/\_\_moduleInfo', (req, res) => {
-if (req.body?.password !== password) {
-return res.status(401).json({ error: 'Incorrect password' });
-}
+  app.get(customEndpoint ?? '/__moduleInfo', (req, res) => {
+    if (req.body?.password !== password) {
+      return res.status(401).json({ error: 'Incorrect password' });
+    }
 
     return res.json(rl.getCachedModulesInfo());
-
-});
+  });
 };
 ```
 
@@ -198,15 +199,15 @@ Additionally, it's worth to set up /\_\_moduleInfo endpoint that can show valuab
 By default, adding a module implementation does not trigger its parsing. The module will only be parsed once on the first request. But module caching can be turned off - in this case the module will be parsed every time it's requested. In order to see the difference, we've wrapped an actual module function in an IIFE. An IIFE can be used to leverage closure and [the module pattern](https://developer.mozilla.org/en-US/docs/Glossary/IIFE#the_module_pattern).
 
 ```js
- rl.addImplementationForModule(
-      'module',
-      `(() => {
+rl.addImplementationForModule(
+  'module',
+  `(() => {
         // this runs every time when caching is disabled
         let x = 0;
         return () => ++x;
        })();`,
-      false, // This disables caching
-    );
+  false, // This disables caching
+);
 ```
 
 ### Resetless CLI
@@ -258,16 +259,16 @@ It consists of two objects, first one is called `uploadSettings` and it allows t
 ```js
 // this is the default request that CLI makes
 axios({
-    method: 'POST',
-    data: {
-      module: {
-        name: moduleName,
-        code: options.code,
-        enableCaching: options.isCachingEnabled ?? true,
-      },
+  method: 'POST',
+  data: {
+    module: {
+      name: moduleName,
+      code: options.code,
+      enableCaching: options.isCachingEnabled ?? true,
     },
-    ...options.requestConfig,
-  });
+  },
+  ...options.requestConfig,
+});
 ```
 
 If You want upload a Resetless module from the CLI, run:
